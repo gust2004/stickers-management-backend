@@ -5,6 +5,9 @@ class Sticker < ApplicationRecord
 
   scope :by_uuid, (->(uuid) { where(uuid: uuid) })
   scope :by_collection, (->(collection) { where('collection_id=?', collection.id).order(:number) })
+  scope :missing, (-> { where('quantity = ?', 0).order(:number) })
+  scope :used, (-> { where('quantity = ?', 1).order(:number) })
+  scope :repeated, (-> { where('quantity > ?', 1).order(:number) })
 
   after_initialize :set_uuid
 
@@ -32,23 +35,4 @@ class Sticker < ApplicationRecord
   def set_uuid
     self.uuid ||= SecureRandom.uuid
   end
-
-  #
-  # scope :by_uuid, (->(uuid) { where(uuid: uuid) })
-  # scope :by_collection, (->(collection) { where('collection_id=?', collection.id).order(:number) })
-  # scope :missing, (-> { where('quantity = ?', 0).order(:number) })
-  # scope :used, (-> { where('quantity = ?', 1).order(:number) })
-  # scope :repeated, (-> { where('quantity > ?', 1).order(:number) })
-  #
-  # after_initialize :set_uuid
-  #
-  # validates :number, :quantity, :uuid, presence: true
-  #
-
-  #
-  # protected
-  #
-  # def set_uuid
-  #   self.uuid ||= SecureRandom.uuid
-  # end
 end
