@@ -1,0 +1,28 @@
+en:
+  activerecord:
+    errors:
+      models:
+        collector:
+          attributes:
+            name:
+              blank: "STICKERS001 - O nome do colecionador é obrigatório"
+            email:
+              blank: "STICKERS002 - O email do colecionador é obrigatório"
+              taken: "STICKERS003 - Já existe um colecionador com este email"
+              email: "STICKERS004 - O email do colecionador não é um email válido"
+        album:
+          attributes:
+            name:
+              blank: "STICKERS005 - O nome do álbum é obrigatório"
+              taken: "STICKERS006 - Já existe um álbum com este nome"
+            number_of_stickers:
+              blank: "STICKERS007 - O número de figurinhas do álbum é obrigatório"
+        sticker:
+          attributes:
+            number:
+              blank: "STICKERS008 - O número da figurinha é obrigatório"
+            quantity:
+              blank: "STICKERS009 - O quantidade da figurinha é obrigatório"
+  errors:
+    messages:
+      parameter_missing_exception: "STICKERS010 - Parâmetro %{parameter} obrigatório"

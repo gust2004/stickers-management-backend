@@ -1,0 +1,47 @@
+default: &default
+  adapter: postgresql
+  encoding: utf8
+  port: 5432
+  pool: <%= ENV['RAILS_MAX_THREADS'] || 5 %>
+  timeout: 5000
+  reconnect: true
+  connect_timeout: 2
+  keepalives_idle: 30
+  keepalives_interval: 10
+  keepalives_count: 2
+  checkout_timeout: 5
+  reaping_frequency: 10
+
+development:
+  <<: *default
+  database: stickers_management_dev_db_v3
+  username: stickers_management
+  password: StickersManagement!23
+  host: localhost
+
+staging:
+  <<: *default
+  database: <%= ENV["STICKERS_MANAGEMENT_SCHEMA"] %>
+  username: <%= ENV["STICKERS_MANAGEMENT_USER"] %>
+  password: <%= ENV["STICKERS_MANAGEMENT_PASSWORD"] %>
+  host: <%= ENV["STICKERS_MANAGEMENT_HOST"] %>
+
+migration:
+  <<: *default
+  database: <%= ENV["STICKERS_MANAGEMENT_SCHEMA"] %>
+  username: <%= ENV["STICKERS_MANAGEMENT_USER"] %>
+  password: <%= ENV["STICKERS_MANAGEMENT_PASSWORD"] %>
+  host: <%= ENV["STICKERS_MANAGEMENT_HOST"] %>
+
+production:
+  <<: *default
+  database: <%= ENV["STICKERS_MANAGEMENT_SCHEMA"] %>
+  username: <%= ENV["STICKERS_MANAGEMENT_USER"] %>
+  password: <%= ENV["STICKERS_MANAGEMENT_PASSWORD"] %>
+  host: <%= ENV["STICKERS_MANAGEMENT_HOST"] %>
+
+test:
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
+  database: db/test.sqlite3

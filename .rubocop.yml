@@ -1,0 +1,44 @@
+AllCops:
+  TargetRubyVersion: 2.6
+  Include:
+    - "**/*.rb"
+    - "**/*.gemspec"
+    - "**/*.podspec"
+    - "**/*.jbuilder"
+    - "**/*.rake"
+    - "**/*.opal"
+    - "**/Gemfile"
+    - "**/Rakefile"
+    - "**/Capfile"
+    - "**/Guardfile"
+    - "**/Podfile"
+    - "**/Thorfile"
+    - "**/Vagrantfile"
+    - "**/Berksfile"
+    - "**/Cheffile"
+    - "**/Vagabondfile"
+    - "**/Fastfile"
+    - "**/*Fastfile"
+  Exclude:
+    - "vendor/**/*"
+    - "bin/**/*"
+    - "db/**/*"
+
+Style/Documentation:
+  Description: "Document classes and non-namespace modules."
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 140
+  AllowHeredoc: true
+  AllowURI: true
+  URISchemes:
+    - http
+    - https
+Metrics/BlockLength:
+  ExcludedMethods: ["describe", "context", "define", "factory"]
+  Exclude:
+    - "**/*.rake"
+
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
