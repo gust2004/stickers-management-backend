@@ -9,7 +9,7 @@ class CollectionSerializer < ApplicationSerializer
   has_one :collector
 
   def percent_of_completion
-    "#{((object.stickers.used.count.to_f / object.album.number_of_stickers.to_f) * 100).round(2)} %"
+    "#{((object.stickers.used.count / object.album.number_of_stickers).to_f * 100).round(2)} %"
   end
 
   def number_of_used_stickers

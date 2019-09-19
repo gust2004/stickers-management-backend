@@ -25,8 +25,8 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="app-serializers-collection_serializer_rb.html">app/serializers/collection_serializer.rb</a></td>
-            <td class='right_align'><tt>37</tt></td>
-            <td class='right_align'><tt>3</tt></td>
+            <td class='right_align'><tt>34</tt></td>
+            <td class='right_align'><tt>16</tt></td>
             <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
       <div class="percent_graph">
         <div class="covered" style="width:100px"></div>
@@ -60,111 +60,102 @@
           <td><pre><a name="line4">4</a> class CollectionSerializer &lt; ApplicationSerializer</pre></td>
         </tr>
         <tr class="marked">
-          <td><pre><a name="line5">5</a>   has_one :album</pre></td>
+          <td><pre><a name="line5">5</a>   attributes :percent_of_completion,</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line6">6</a>              :number_of_used_stickers, :number_of_repeated_stickers,</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line7">7</a>              :number_of_missing_stickers, :created_at, :updated_at</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line8">8</a> </pre></td>
         </tr>
         <tr class="marked">
-          <td><pre><a name="line6">6</a>   has_one :collector</pre></td>
+          <td><pre><a name="line9">9</a>   has_one :album</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line10">10</a>   has_one :collector</pre></td>
         </tr>
         <tr class="inferred">
-          <td><pre><a name="line7">7</a> </pre></td>
+          <td><pre><a name="line11">11</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line12">12</a>   def percent_of_completion</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line13">13</a>     &quot;#{((object.stickers.used.count / object.album.number_of_stickers).to_f * 100).round(2)} %&quot;</pre></td>
         </tr>
         <tr class="inferred">
-          <td><pre><a name="line8">8</a>   # attributes :percent_of_completion,</pre></td>
+          <td><pre><a name="line14">14</a>   end</pre></td>
         </tr>
         <tr class="inferred">
-          <td><pre><a name="line9">9</a>   #            :number_of_used_stickers, :number_of_repeated_stickers,</pre></td>
+          <td><pre><a name="line15">15</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line16">16</a>   def number_of_used_stickers</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line17">17</a>     object.stickers.used.count</pre></td>
         </tr>
         <tr class="inferred">
-          <td><pre><a name="line10">10</a>   #            :number_of_missing_stickers, :created_at, :updated_at</pre></td>
+          <td><pre><a name="line18">18</a>   end</pre></td>
         </tr>
         <tr class="inferred">
-          <td><pre><a name="line11">11</a>   #</pre></td>
+          <td><pre><a name="line19">19</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line20">20</a>   def number_of_repeated_stickers</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line21">21</a>     object.stickers.repeated.map(&amp;:number_of_repeated).reduce(0, :+)</pre></td>
         </tr>
         <tr class="inferred">
-          <td><pre><a name="line12">12</a>   # has_one :album</pre></td>
+          <td><pre><a name="line22">22</a>   end</pre></td>
         </tr>
         <tr class="inferred">
-          <td><pre><a name="line13">13</a>   # has_one :collector</pre></td>
+          <td><pre><a name="line23">23</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line24">24</a>   def number_of_missing_stickers</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line25">25</a>     object.stickers.missing.count</pre></td>
         </tr>
         <tr class="inferred">
-          <td><pre><a name="line14">14</a>   #</pre></td>
+          <td><pre><a name="line26">26</a>   end</pre></td>
         </tr>
         <tr class="inferred">
-          <td><pre><a name="line15">15</a>   # def percent_of_completion</pre></td>
+          <td><pre><a name="line27">27</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line28">28</a>   def created_at</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line29">29</a>     DatetimeUtil.convert_to_miliseconds(object.created_at.to_datetime)</pre></td>
         </tr>
         <tr class="inferred">
-          <td><pre><a name="line16">16</a>   #   &quot;#{((object.stickers.used.count.to_f / object.album.number_of_stickers.to_f) * 100).round(2)} %&quot;</pre></td>
+          <td><pre><a name="line30">30</a>   end</pre></td>
         </tr>
         <tr class="inferred">
-          <td><pre><a name="line17">17</a>   # end</pre></td>
+          <td><pre><a name="line31">31</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line32">32</a>   def updated_at</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line33">33</a>     DatetimeUtil.convert_to_miliseconds(object.updated_at.to_datetime)</pre></td>
         </tr>
         <tr class="inferred">
-          <td><pre><a name="line18">18</a>   #</pre></td>
+          <td><pre><a name="line34">34</a>   end</pre></td>
         </tr>
         <tr class="inferred">
-          <td><pre><a name="line19">19</a>   # def number_of_used_stickers</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line20">20</a>   #   object.stickers.used.count</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line21">21</a>   # end</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line22">22</a>   #</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line23">23</a>   # def number_of_repeated_stickers</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line24">24</a>   #   object.stickers.repeated.map(&amp;:number_of_repeated).reduce(0, :+)</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line25">25</a>   # end</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line26">26</a>   #</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line27">27</a>   # def number_of_missing_stickers</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line28">28</a>   #   object.stickers.missing.count</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line29">29</a>   # end</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line30">30</a>   #</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line31">31</a>   # def created_at</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line32">32</a>   #   DatetimeUtil.convert_to_miliseconds(object.created_at.to_datetime)</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line33">33</a>   # end</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line34">34</a>   #</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line35">35</a>   # def updated_at</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line36">36</a>   #   DatetimeUtil.convert_to_miliseconds(object.updated_at.to_datetime)</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line37">37</a>   # end</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line38">38</a> end</pre></td>
+          <td><pre><a name="line35">35</a> end</pre></td>
         </tr>
       </tbody>
     </table>
 
-    <p>Generated on 2019-09-18 21:58:33 -0300 with <a href="https://github.com/fguillen/simplecov-rcov">SimpleCov-RCov 0.2.3</a></p>
+    <p>Generated on 2019-09-19 20:04:53 -0300 with <a href="https://github.com/fguillen/simplecov-rcov">SimpleCov-RCov 0.2.3</a></p>
 
   </body>
 </html>

@@ -25,17 +25,17 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="app-models-sticker_rb.html">app/models/sticker.rb</a></td>
-            <td class='right_align'><tt>54</tt></td>
-            <td class='right_align'><tt>19</tt></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>87.04%</tt></div>
+            <td class='right_align'><tt>38</tt></td>
+            <td class='right_align'><tt>22</tt></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
       <div class="percent_graph">
-        <div class="covered" style="width:87px"></div>
-        <div class="uncovered" style="width:13px"></div>
+        <div class="covered" style="width:100px"></div>
+        <div class="uncovered" style="width:0px"></div>
       </div></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>63.16%</tt></div>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
       <div class="percent_graph">
-        <div class="covered" style="width:63px"></div>
-        <div class="uncovered" style="width:37px"></div>
+        <div class="covered" style="width:100px"></div>
+        <div class="uncovered" style="width:0px"></div>
       </div></td>
           </tr>
         </tbody>
@@ -71,151 +71,103 @@
         <tr class="marked">
           <td><pre><a name="line8">8</a>   scope :by_collection, (-&gt;(collection) { where(&#39;collection_id=?&#39;, collection.id).order(:number) })</pre></td>
         </tr>
+        <tr class="marked">
+          <td><pre><a name="line9">9</a>   scope :missing, (-&gt; { where(&#39;quantity = ?&#39;, 0).order(:number) })</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line10">10</a>   scope :used, (-&gt; { where(&#39;quantity = ?&#39;, 1).order(:number) })</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line11">11</a>   scope :repeated, (-&gt; { where(&#39;quantity &gt; ?&#39;, 1).order(:number) })</pre></td>
+        </tr>
         <tr class="inferred">
-          <td><pre><a name="line9">9</a> </pre></td>
+          <td><pre><a name="line12">12</a> </pre></td>
         </tr>
         <tr class="marked">
-          <td><pre><a name="line10">10</a>   after_initialize :set_uuid</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line11">11</a> </pre></td>
-        </tr>
-        <tr class="marked">
-          <td><pre><a name="line12">12</a>   validates :uuid, uniqueness: true</pre></td>
-        </tr>
-        <tr class="marked">
-          <td><pre><a name="line13">13</a>   validates :number, :quantity, :uuid, presence: true</pre></td>
+          <td><pre><a name="line13">13</a>   after_initialize :set_uuid</pre></td>
         </tr>
         <tr class="inferred">
           <td><pre><a name="line14">14</a> </pre></td>
         </tr>
         <tr class="marked">
-          <td><pre><a name="line15">15</a>   STATUS = [REPEATED = &#39;REPEATED&#39;, USED = &#39;USED&#39;, MISSING = &#39;MISSING&#39;].freeze</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line16">16</a> </pre></td>
+          <td><pre><a name="line15">15</a>   validates :uuid, uniqueness: true</pre></td>
         </tr>
         <tr class="marked">
-          <td><pre><a name="line17">17</a>   def status</pre></td>
-        </tr>
-        <tr class="uncovered">
-          <td><pre><a name="line18">18</a>     if quantity.zero?</pre></td>
-        </tr>
-        <tr class="uncovered">
-          <td><pre><a name="line19">19</a>       Sticker::MISSING</pre></td>
-        </tr>
-        <tr class="uncovered">
-          <td><pre><a name="line20">20</a>     elsif quantity == 1</pre></td>
-        </tr>
-        <tr class="uncovered">
-          <td><pre><a name="line21">21</a>       Sticker::USED</pre></td>
+          <td><pre><a name="line16">16</a>   validates :number, :quantity, :uuid, presence: true</pre></td>
         </tr>
         <tr class="inferred">
-          <td><pre><a name="line22">22</a>     else</pre></td>
-        </tr>
-        <tr class="uncovered">
-          <td><pre><a name="line23">23</a>       Sticker::REPEATED</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line24">24</a>     end</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line25">25</a>   end</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line26">26</a> </pre></td>
+          <td><pre><a name="line17">17</a> </pre></td>
         </tr>
         <tr class="marked">
-          <td><pre><a name="line27">27</a>   def number_of_repeated</pre></td>
+          <td><pre><a name="line18">18</a>   STATUS = [REPEATED = &#39;REPEATED&#39;, USED = &#39;USED&#39;, MISSING = &#39;MISSING&#39;].freeze</pre></td>
         </tr>
-        <tr class="uncovered">
-          <td><pre><a name="line28">28</a>     return quantity - 1 if quantity &gt; 1</pre></td>
+        <tr class="inferred">
+          <td><pre><a name="line19">19</a> </pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line20">20</a>   def status</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line21">21</a>     if quantity.zero?</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line22">22</a>       Sticker::MISSING</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line23">23</a>     elsif quantity == 1</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line24">24</a>       Sticker::USED</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line25">25</a>     else</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line26">26</a>       Sticker::REPEATED</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line27">27</a>     end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line28">28</a>   end</pre></td>
         </tr>
         <tr class="inferred">
           <td><pre><a name="line29">29</a> </pre></td>
         </tr>
-        <tr class="uncovered">
-          <td><pre><a name="line30">30</a>     0</pre></td>
+        <tr class="marked">
+          <td><pre><a name="line30">30</a>   def number_of_repeated</pre></td>
         </tr>
-        <tr class="inferred">
-          <td><pre><a name="line31">31</a>   end</pre></td>
+        <tr class="marked">
+          <td><pre><a name="line31">31</a>     return quantity - 1 if quantity &gt; 1</pre></td>
         </tr>
         <tr class="inferred">
           <td><pre><a name="line32">32</a> </pre></td>
         </tr>
         <tr class="marked">
-          <td><pre><a name="line33">33</a>   def set_uuid</pre></td>
+          <td><pre><a name="line33">33</a>     0</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line34">34</a>   end</pre></td>
+        </tr>
+        <tr class="inferred">
+          <td><pre><a name="line35">35</a> </pre></td>
         </tr>
         <tr class="marked">
-          <td><pre><a name="line34">34</a>     self.uuid ||= SecureRandom.uuid</pre></td>
+          <td><pre><a name="line36">36</a>   def set_uuid</pre></td>
+        </tr>
+        <tr class="marked">
+          <td><pre><a name="line37">37</a>     self.uuid ||= SecureRandom.uuid</pre></td>
         </tr>
         <tr class="inferred">
-          <td><pre><a name="line35">35</a>   end</pre></td>
+          <td><pre><a name="line38">38</a>   end</pre></td>
         </tr>
         <tr class="inferred">
-          <td><pre><a name="line36">36</a> </pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line37">37</a>   #</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line38">38</a>   # scope :by_uuid, (-&gt;(uuid) { where(uuid: uuid) })</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line39">39</a>   # scope :by_collection, (-&gt;(collection) { where(&#39;collection_id=?&#39;, collection.id).order(:number) })</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line40">40</a>   # scope :missing, (-&gt; { where(&#39;quantity = ?&#39;, 0).order(:number) })</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line41">41</a>   # scope :used, (-&gt; { where(&#39;quantity = ?&#39;, 1).order(:number) })</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line42">42</a>   # scope :repeated, (-&gt; { where(&#39;quantity &gt; ?&#39;, 1).order(:number) })</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line43">43</a>   #</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line44">44</a>   # after_initialize :set_uuid</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line45">45</a>   #</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line46">46</a>   # validates :number, :quantity, :uuid, presence: true</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line47">47</a>   #</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line48">48</a> </pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line49">49</a>   #</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line50">50</a>   # protected</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line51">51</a>   #</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line52">52</a>   # def set_uuid</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line53">53</a>   #   self.uuid ||= SecureRandom.uuid</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line54">54</a>   # end</pre></td>
-        </tr>
-        <tr class="inferred">
-          <td><pre><a name="line55">55</a> end</pre></td>
+          <td><pre><a name="line39">39</a> end</pre></td>
         </tr>
       </tbody>
     </table>
 
-    <p>Generated on 2019-09-18 21:58:33 -0300 with <a href="https://github.com/fguillen/simplecov-rcov">SimpleCov-RCov 0.2.3</a></p>
+    <p>Generated on 2019-09-19 20:04:53 -0300 with <a href="https://github.com/fguillen/simplecov-rcov">SimpleCov-RCov 0.2.3</a></p>
 
   </body>
 </html>
