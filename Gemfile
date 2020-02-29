@@ -9,7 +9,7 @@ gem 'active_model_serializers', '~> 0.8.3'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'data_migrate', '~> 6.0'
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 3.12'
 gem 'rails', '~> 6.0.0'
 
 group :development, :test do
